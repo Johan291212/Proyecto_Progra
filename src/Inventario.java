@@ -42,10 +42,7 @@ public class Inventario {
 
             Libro l = listaLibros.get(i);
 
-            texto += "Código: " + l.getCodigo()
-                    + "\nTítulo: " + l.getTitulo()
-                    + "\nUbicación: " + l.getUbicacion().mostrarUbicacion()
-                    + "\n-----------------------\n";
+            texto += "Código: " + l.getCodigo() + "\nTítulo: " + l.getTitulo()+ "\nUbicación: " + l.getUbicacion().mostrarUbicacion() + "\n-----------------------\n";
         }
 
         return texto;

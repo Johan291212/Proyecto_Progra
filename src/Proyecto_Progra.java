@@ -1,3 +1,12 @@
+
+
+/*
+Universidad Fidelitas
+Proyecto de introduccion a Programacion Orientada a Objetos
+Johan Ledezma Alvarez
+Julian Guadron Barquero
+Aresys Saeed Grant Arceda
+*/
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
@@ -15,20 +24,15 @@ public class Proyecto_Progra {
     /**
      * @param args the command line arguments
      */
+    
+    
     public static void main(String[] args) {
         Inventario inventario = new Inventario();
         String opcion;
 
         do {
 
-            opcion = JOptionPane.showInputDialog(
-                    "=== SISTEMA DE INVENTARIO ===\n"
-                    + "1. Registrar libro\n"
-                    + "2. Buscar libro\n"
-                    + "3. Reubicar libro\n"
-                    + "4. Mostrar inventario\n"
-                    + "5. Salir"
-            );
+            opcion = JOptionPane.showInputDialog(" SISTEMA DE INVENTARIO \n" + "1. Registrar libro\n"+ "2. Buscar libro\n"+ "3. Reubicar libro\n"+ "4. Mostrar inventario\n"+ "5. Salir");
 
             switch (opcion) {
 
