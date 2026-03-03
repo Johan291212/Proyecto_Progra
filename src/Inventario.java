@@ -2,16 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-
+import java.util.ArrayList;
 /**
  *
  * @author Ryzen
  */
-import java.util.ArrayList;
-
 public class Inventario {
-
-    private ArrayList<Libro> listaLibros;
+     private ArrayList<Libro> listaLibros;
 
     public Inventario() {
         listaLibros = new ArrayList<>();
