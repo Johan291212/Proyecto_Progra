@@ -24,7 +24,24 @@ public class Proyecto_Progra {
      */
     public static void main(String[] args) {
 
-        Inventario inventario = new Inventario();
+        Inventario inventario = new Inventario(3, 3, 3);
+
+        Libro l1 = new Libro("001", "Java Básico", "Juan Perez", "Programación", 10, 5000,
+                new Ubicacion(0, 0, 0));
+
+        Libro l2 = new Libro("002", "Estructuras de Datos", "Maria Lopez", "Programación", 5, 7000,
+                new Ubicacion(0, 1, 1));
+
+        Libro l3 = new Libro("003", "POO en Java", "Carlos Ruiz", "Programación", 8, 6500,
+                new Ubicacion(1, 0, 2));
+
+        inventario.agregarLibro(l1);
+        inventario.agregarLibro(l2);
+        inventario.agregarLibro(l3);
+
+        inventario.asignarUbicacion(l1, 0, 0, 0);
+        inventario.asignarUbicacion(l2, 0, 1, 1);
+        inventario.asignarUbicacion(l3, 1, 0, 2);
         String opcion;
 
         do {
@@ -71,8 +88,47 @@ public class Proyecto_Progra {
     }
 
     /**
-     * Registra un nuevo libro en el inventario. Solicita los datos al usuario y
-     * valida que el código no esté duplicado.
+     * Solicita al usuario un número entero mediante una ventana emergente y
+     * valida que la entrada sea correcta. En caso de error (letras, vacío,
+     * etc.), vuelve a solicitar el dato.
+     *
+     * @param mensaje mensaje que se muestra al usuario
+     * @return número entero válido ingresado por el usuario
+     */
+    public static int leerEntero(String mensaje) {
+        while (true) {
+            try {
+                return Integer.parseInt(JOptionPane.showInputDialog(mensaje));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ingrese un número válido.");
+            }
+        }
+    }
+
+    /**
+     * Solicita al usuario un número decimal mediante una ventana emergente y
+     * valida que la entrada sea correcta. En caso de error, vuelve a solicitar
+     * el dato.
+     *
+     * @param mensaje mensaje que se muestra al usuario
+     * @return número decimal válido ingresado por el usuario
+     */
+    public static double leerDouble(String mensaje) {
+        while (true) {
+            try {
+                return Double.parseDouble(JOptionPane.showInputDialog(mensaje));
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, "Ingrese un número válido.");
+            }
+        }
+    }
+
+    /**
+     * Registra un nuevo libro en el inventario.
+     *
+     * Realiza las siguientes validaciones: - Verifica que el código no esté
+     * duplicado - Valida que los datos numéricos sean correctos - Verifica que
+     * la ubicación en la bodega esté disponible
      *
      * @param inventario objeto Inventario donde se almacenan los libros
      */
@@ -88,16 +144,26 @@ public class Proyecto_Progra {
         String titulo = JOptionPane.showInputDialog("Ingrese título:");
         String autor = JOptionPane.showInputDialog("Ingrese autor:");
         String categoria = JOptionPane.showInputDialog("Ingrese categoría:");
-        int cantidad = Integer.parseInt(JOptionPane.showInputDialog("Cantidad:"));
-        double precio = Double.parseDouble(JOptionPane.showInputDialog("Precio:"));
+        int cantidad = leerEntero("Cantidad:");
+        double precio = leerDouble("Precio:");
 
-        int estante = Integer.parseInt(JOptionPane.showInputDialog("Estante:"));
-        int fila = Integer.parseInt(JOptionPane.showInputDialog("Fila:"));
-        int columna = Integer.parseInt(JOptionPane.showInputDialog("Columna:"));
+        int estante = leerEntero("Estante:");
+        int fila = leerEntero("Fila:");
+        int columna = leerEntero("Columna:");
 
         Ubicacion ubicacion = new Ubicacion(estante, fila, columna);
 
         Libro libro = new Libro(codigo, titulo, autor, categoria, cantidad, precio, ubicacion);
+
+        /**
+         *
+         * Validacion de la bodega
+         *
+         */
+        if (!inventario.asignarUbicacion(libro, estante, fila, columna)) {
+            JOptionPane.showMessageDialog(null, "Ubicación ocupada o inválida.");
+            return;
+        }
 
         inventario.agregarLibro(libro);
 
@@ -118,7 +184,7 @@ public class Proyecto_Progra {
 
         if (libro != null) {
 
-            int cantidadVenta = Integer.parseInt(JOptionPane.showInputDialog("Cantidad a vender:"));
+            int cantidadVenta = leerEntero("Cantidad a vender:");
 
             // Validación de cantidad inválida
             if (cantidadVenta <= 0) {
@@ -181,9 +247,15 @@ public class Proyecto_Progra {
 
         if (libro != null) {
 
-            int estante = Integer.parseInt(JOptionPane.showInputDialog("Nuevo estante:"));
-            int fila = Integer.parseInt(JOptionPane.showInputDialog("Nueva fila:"));
-            int columna = Integer.parseInt(JOptionPane.showInputDialog("Nueva columna:"));
+            int estante = leerEntero("Nuevo estante:");
+            int fila = leerEntero("Nueva fila:");
+            int columna = leerEntero("Nueva columna:");
+
+//
+            if (!inventario.asignarUbicacion(libro, estante, fila, columna)) {
+                JOptionPane.showMessageDialog(null, "Ubicación ocupada o inválida.");
+                return;
+            }
 
             libro.setUbicacion(new Ubicacion(estante, fila, columna));
 

@@ -57,7 +57,7 @@ public class Inventario {
      * inicializa la bodega)
      */
     public Inventario() {
-        listaLibros = new ArrayList<>();
+       this(3, 3, 3);
     }
 
     /**
